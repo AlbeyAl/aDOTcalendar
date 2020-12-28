@@ -7,45 +7,28 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
-            <table id="calendar">
-                <thead id="calendar-header">
-                    <tr>
-                        <th scope="col">Sunday</th>
-                        <th scope="col">Monday</th>
-                        <th scope="col">Tuesday</th>
-                        <th scope="col">Wednesday</th>
-                        <th scope="col">Thursday</th>
-                        <th scope="col">Friday</th>
-                        <th scope="col">Saturday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in calendar %}
-                    <tr>
-                        {% for column in row %}
-                        {% if column == 0 %}
-                        <td id="calendar-element">
-                            <div class="card square">
-                                <div class="card-body square-content">
-                                    <h5 class="card-title"></h5>
-                                </div>
-                            </div>
-                        </td>
-                        {% else %}
-                        <td id="calendar-element">
-                            <div class="card square text-dark bg-light">
-                                <div class="card-body square-content">
-                                    <h5 class="card-title">{{ column }}</h5>
-                                </div>
-                            </div>
-                        </td>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        {% for row in calendar %}
+        <div class="row">    
+            {% for column in row %}
+            {% if column == 0 %}
+            <div class="col" id="calendar-element">
+                <div class="card square">
+                    <div class="card-body square-content">
+                        <h5 class="card-title"></h5>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col" id="calendar-element">
+                <div class="card square text-dark bg-light" id="calendar-element">
+                    <div class="card-body square-content">
+                        <h5 class="card-title">{{ column }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 {% endblock %}
