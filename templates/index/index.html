@@ -6,29 +6,31 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container" id="calendar">
         {% for row in calendar %}
-        <div class="row">    
+            <div class="row">    
             {% for column in row %}
-            {% if column == 0 %}
-            <div class="col" id="calendar-element">
-                <div class="card square">
-                    <div class="card-body square-content">
-                        <h5 class="card-title"></h5>
+                {% if column != -1 %}
+                    {% if column == 0 %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title"></h6>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="col" id="calendar-element">
-                <div class="card square text-dark bg-light" id="calendar-element">
-                    <div class="card-body square-content">
-                        <h5 class="card-title">{{ column }}</h5>
+                    {% else %}
+                    <div class="col">
+                        <div class="card text-dark bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ column }}</h6>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% endif %}
+                    {% endif %}
+                {% endif %}
             {% endfor %}
-        </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

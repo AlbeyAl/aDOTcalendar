@@ -23,6 +23,15 @@ def index(request):
             calendar[math.ceil(column / 7) - 1
                      ][(column - (math.floor(column / 7) * 7)) - 1] = 0
 
+    for row in range(len(calendar)):
+        columnCount = 0
+        for column in range(len(calendar[row])):
+            columnCount += calendar[row][column]
+
+        for column in range(len(calendar[row])):
+            if columnCount == 0:
+                calendar[row][column] = -1
+
     context_dict = {
         'current_app': date.get_start_day_of_week, 'calendar': calendar}
 
