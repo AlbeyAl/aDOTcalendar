@@ -23,19 +23,17 @@ body {
   margin: 0;
 }
 
-#calendar .col :hover {
+#calendar .col:hover {
   animation: calendar-element-grow 0.1s linear forwards;
 }
 
 @keyframes calendar-element-grow {
   0% {
     transform: scale(1);
-    border-radius: 0;
     z-index: 1;
   }
   100% {
-    transform: scale(1.1);
-    border-radius: 5px;
+    transform: scale(1.15);
     z-index: 999;
   }
 }

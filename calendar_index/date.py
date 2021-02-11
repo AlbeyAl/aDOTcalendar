@@ -1,48 +1,13 @@
-from django.shortcuts import render
 import math
-
-
-def index(request):
-    date = Date(1, 1, 2056)
-
-    calendar = [[0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0]]
-
-    day_count = 1
-
-    for column in range(42):
-        if column > date.get_start_day_of_week() and day_count <= date.get_days_in_month():
-            calendar[math.ceil(column / 7) - 1
-                     ][(column - (math.floor(column / 7) * 7)) - 1] = day_count
-            day_count += 1
-        else:
-            calendar[math.ceil(column / 7) - 1
-                     ][(column - (math.floor(column / 7) * 7)) - 1] = 0
-
-    for row in range(len(calendar)):
-        columnCount = 0
-        for column in range(len(calendar[row])):
-            columnCount += calendar[row][column]
-
-        for column in range(len(calendar[row])):
-            if columnCount == 0:
-                calendar[row][column] = -1
-
-    context_dict = {
-        'current_app': date.get_start_day_of_week, 'calendar': calendar}
-
-    return render(request, 'index/index.html', context=context_dict)
-
 
 class Date():
     def __init__(self, m, d, y):
         self.month = m
         self.day = d
         self.year = y
+
+    def __str__(self):
+        return "Date (M/D/YYYY): " + str(self.get_month()) + '/' + str(self.get_day()) + '/' + str(self.get_year())
 
     def get_month(self):
         return self.month
@@ -87,7 +52,12 @@ class Date():
 
         results = (f % 7)
 
-        return results
+        # The reason for adding one to the results is because the formula starts at zero and counts up.
+        # For instance, if the start of the month falls on the first day of the week it would return a zero, but
+        # if it falls on the second day of the week it would return a one. By adding the one to the results makes
+        # future calculations easier for the end user.
+
+        return results + 1
 
     def is_leap_year(self):
         results = False
@@ -152,11 +122,22 @@ class Date():
     def valid_date(self):
         return self.valid_month() and self.valid_day() and self.valid_year()
 
-# def list_calendars(request):
+    def prev_month(self):
+        new_year = self.get_year()
+        new_month = self.get_month() - 1
 
-# def calendar(request):
+        if self.get_month() == 1:
+            new_year -= 1
+            new_month = 12
 
-# def event(request):
+        return Date(new_month, 1, new_year)
 
-# def todo(request):
+    def next_month(self):
+        new_year = self.get_year()
+        new_month = self.get_month() + 1
 
+        if self.get_month() == 12:
+            new_year += 1
+            new_month = 1
+
+        return Date(new_month, 1, new_year)
