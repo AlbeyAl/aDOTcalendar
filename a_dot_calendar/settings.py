@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_sass',
     # 'social_django',
-    'index',
     'calendar_index',
 ]
 
@@ -119,7 +118,6 @@ AUTHENTICATION_BACKENDS = (
     # 'social_core.backends.google.GoogleOpenId',
     # 'social_core.backends.google.GoogleOAuth2',
     # 'social_core.backends.google.GoogleOAuth',
-    'index.backends.User',
     'django.contrib.auth.backends.ModelBackend',
 )
 

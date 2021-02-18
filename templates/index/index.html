@@ -7,29 +7,34 @@
 
 {% block body %}
     <div class="container" id="calendar">
-        {% for row in calendar %}
+        {% for calendar_week in calendar_list %}
             <div class="row">    
-            {% for column in row %}
-                {% if column != -1 %}
-                    {% if column == 0 %}
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h6 class="card-title"></h6>
-                            </div>
+            {% for calendar_day in calendar_week %}
+                {% if calendar_day.valid_date %}
+                <div class="col">
+                    <div class="card text-dark 
+                        {% if calendar_day.current_day %}
+                            bg-danger
+                        {% else %}
+                            bg-light
+                    {% endif %}">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ calendar_day.get_date.get_month_str }} {{ calendar_day.get_date.get_day }}</h6>
+                            <a href="#" class="btn {% if calendar_day.current_day %} btn-light {% else %} btn-secondary {% endif %} w-100 text-start"><span class="badge bg-secondary">{{ calendar_day.get_events_count }}</span> Events</a>
+                            <a href="#" class="btn {% if calendar_day.current_day %} btn-light {% else %} btn-secondary {% endif %} w-100 mt-2 text-start"><span class="badge bg-secondary">{{ calendar_day.get_todos_count }}</span> To Do</a>
                         </div>
                     </div>
-                    {% else %}
-                    <div class="col">
-                        <div class="card text-dark bg-light">
-                            <div class="card-body">
-                                <h6 class="card-title">{{ column }}</h6>
-                                <a href="#" class="btn btn-secondary w-100 text-start"><span class="badge bg-secondary">0</span> Events</a>
-                                <a href="#" class="btn btn-secondary w-100 mt-2 text-start"><span class="badge bg-secondary">8</span> To Do</a>
-                            </div>
+                </div>
+                {% else %}
+                <div class="col invalid-date">
+                    <div class="card text-dark bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title">{{calendar_day.get_date.get_month_str}} {{ calendar_day.get_date.get_day }}</h6>
+                            <a href="#" class="btn btn-secondary w-100 text-start"><span class="badge bg-secondary">{{ calendar_day.get_events_count }}</span> Events</a>
+                            <a href="#" class="btn btn-secondary w-100 mt-2 text-start"><span class="badge bg-secondary">{{ calendar_day.get_todos_count }}</span> To Do</a>
                         </div>
                     </div>
-                    {% endif %}
+                </div>
                 {% endif %}
             {% endfor %}
             </div>

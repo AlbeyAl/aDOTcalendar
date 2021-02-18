@@ -48,4 +48,8 @@ body {
         border-radius: 0;
         user-select: none;
     }
+
+    .invalid-day {
+        filter: blur(1px);
+    }
 }

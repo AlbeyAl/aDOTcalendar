@@ -12,6 +12,24 @@ class Date():
     def get_month(self):
         return self.month
 
+    def get_month_str(self):
+        month_switch = {
+            1: "January",
+            2: "February",
+            3: "March",
+            4: "April",
+            5: "May",
+            6: "June",
+            7: "July",
+            8: "August",
+            9: "September",
+            10: "October",
+            11: "November",
+            12: "December"
+        }
+
+        return month_switch.get(self.get_month())
+
     def get_day(self):
         return self.day
 

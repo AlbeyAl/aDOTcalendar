@@ -1,3 +1,6 @@
 from django.contrib import admin
+from calendar_index.models import *
 
-# Register your models here.
+admin.site.register(Calendar)
+admin.site.register(Event)
+admin.site.register(ToDo)

@@ -4,5 +4,5 @@ from calendar_index import views
 app_name = 'index'
 
 urlpatterns = [
-    path('<int:year>/<int:month>/<int:day>', views.calendar)
+    path('<slug:calendar_name>/<int:year>/<int:month>/<int:day>', views.calendar)
 ]

@@ -23,6 +23,10 @@ body {
   margin: 0;
 }
 
+#calendar .invalid-date {
+  filter: brightness(0.3);
+}
+
 #calendar .col:hover {
   animation: calendar-element-grow 0.1s linear forwards;
 }
@@ -34,6 +38,7 @@ body {
   }
   100% {
     transform: scale(1.15);
+    filter: brightness(1);
     z-index: 999;
   }
 }
@@ -43,4 +48,8 @@ body {
   height: 100%;
   border-radius: 0;
   user-select: none;
+}
+
+#calendar .current-day {
+  background-color: gold !important;
 }
